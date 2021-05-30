@@ -27,7 +27,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [Add solution URL here](https://github.com/PierreMage/PierreMage.github.io/frontendmentor/stats-preview-card)
-- Live Site URL: [Add live site URL here](https://pierremage.github.io/frontendmentor/stats-preview-card)
+- Live Site URL: [Add live site URL here](https://pierremage.github.io/frontendmentor/stats-preview-card/)
 
 ## My process
 
