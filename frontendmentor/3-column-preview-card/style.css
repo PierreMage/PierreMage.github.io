@@ -1,0 +1,93 @@
+:root {
+  --size: 15px;
+  --bright-orange: hsl(31, 77%, 52%);
+  --dark-cyan: hsl(184, 100%, 22%);
+  --very-dark-cyan: hsl(179, 100%, 13%);
+  --transparent-white: hsla(0, 0%, 100%, 0.75);
+  --very-light-gray: hsl(0, 0%, 95%);
+  background-color: var(--very-light-gray);
+  font-family: 'Lexend Deca', sans-serif;
+  font-size: var(--size);
+  line-height: 1.5em;
+}
+
+h2 {
+  color: var(--very-light-gray);
+  font-family: 'Big Shoulders Display', cursive;
+  font-size: 2.5rem;
+  margin-top: 4rem;
+  text-transform: uppercase;
+}
+
+p {
+  color: var(--transparent-white);
+}
+
+.cards {
+  margin: 4rem 1rem;
+}
+
+.card {
+  --card-color: var(--bright-orange);
+  background-color: var(--card-color);
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+}
+
+.card a {
+  background-color: var(--very-light-gray);
+  border-radius: 70px;
+  border: 3px solid var(--very-light-gray);
+  color: var(--card-color);
+  margin: 1rem 0;
+  padding: 1em 2.5em;
+  text-decoration: none;
+  text-transform: capitalize;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.card a:active {
+  transform: scale(0.97);
+}
+
+.card img {
+  order: -1;
+}
+
+.card:first-child {
+  border-radius: 10px 10px 0 0;
+}
+
+.card:nth-child(2) {
+  --card-color: var(--dark-cyan);
+}
+
+.card:last-child {
+  --card-color: var(--very-dark-cyan);
+  border-radius: 0 0 10px 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .cards {
+    display: flex;
+    margin: 8rem auto;
+    max-width: 900px;
+  }
+  .card a {
+    margin-top: 4rem;
+  }
+  .card a:focus, .card a:hover {
+    background-color: var(--card-color);
+    color: var(--very-light-gray);
+  }
+  .card:first-child {
+    border-radius: 10px 0 0 10px;
+  }
+  .card:last-child {
+    border-radius: 0 10px 10px 0;
+  }
+}
+/*# sourceMappingURL=style.css.map */
