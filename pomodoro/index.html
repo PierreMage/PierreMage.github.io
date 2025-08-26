@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Pomodoro Timer</h1>
+        </header>
+
+        <main>
+            <!-- Mode Selection Tabs -->
+            <div class="mode-tabs">
+                <button class="mode-tab active" data-mode="pomodoro">Pomodoro</button>
+                <button class="mode-tab" data-mode="shortBreak">Short Break</button>
+                <button class="mode-tab" data-mode="longBreak">Long Break</button>
+            </div>
+
+            <!-- Timer Display -->
+            <div class="timer-display">
+                <div class="time" id="timeDisplay">25:00</div>
+                <div class="session-info">
+                    <span id="sessionCount">Session 1 of 4</span>
+                </div>
+            </div>
+
+            <!-- Control Buttons -->
+            <div class="controls">
+                <button class="control-btn primary" id="startPauseBtn">
+                    <span class="btn-text">START</span>
+                </button>
+                <button class="control-btn secondary" id="resetBtn">RESET</button>
+                <button class="control-btn secondary" id="skipBtn">SKIP</button>
+            </div>
+
+            <!-- Progress Indicator -->
+            <div class="progress-indicator">
+                <div class="progress-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

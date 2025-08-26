@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .pass { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .fail { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #0056b3; }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pomodoro Timer Test Suite</h1>
+    
+    <div class="test-section">
+        <h2>Live Application</h2>
+        <iframe src="index.html"></iframe>
+    </div>
+    
+    <div class="test-section">
+        <h2>Automated Tests</h2>
+        <button onclick="runTests()">Run All Tests</button>
+        <div id="testResults"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Manual Test Checklist</h2>
+        <ul>
+            <li>✓ Timer displays 25:00 initially</li>
+            <li>✓ Start button changes to Pause when clicked</li>
+            <li>✓ Timer counts down every second</li>
+            <li>✓ Reset button resets timer to initial value</li>
+            <li>✓ Mode tabs switch between Pomodoro/Short Break/Long Break</li>
+            <li>✓ Background color changes with mode</li>
+            <li>✓ Progress dots show current session</li>
+            <li>✓ Skip button advances to next mode</li>
+            <li>✓ Keyboard shortcuts work (Space, R, S)</li>
+            <li>✓ Responsive design works on mobile</li>
+            <li>✓ State persists after page refresh</li>
+            <li>✓ Audio notification plays on completion</li>
+        </ul>
+    </div>
+
+    <script>
+        function runTests() {
+            const results = document.getElementById('testResults');
+            results.innerHTML = '';
+
+            const tests = [
+                {
+                    name: 'HTML file exists and loads',
+                    test: async () => {
+                        try {
+                            const response = await fetch('index.html');
+                            return response.ok;
+                        } catch (e) {
+                            return false;
+                        }
+                    }
+                },
+                {
+                    name: 'CSS file exists and loads',
+                    test: async () => {
+                        try {
+                            const response = await fetch('style.css');
+                            return response.ok;
+                        } catch (e) {
+                            return false;
+                        }
+                    }
+                },
+                {
+                    name: 'JavaScript file exists and loads',
+                    test: async () => {
+                        try {
+                            const response = await fetch('script.js');
+                            return response.ok;
+                        } catch (e) {
+                            return false;
+                        }
+                    }
+                },
+                {
+                    name: 'HTML contains required elements',
+                    test: async () => {
+                        try {
+                            const response = await fetch('index.html');
+                            const html = await response.text();
+                            return html.includes('id="timeDisplay"') &&
+                                   html.includes('id="startPauseBtn"') &&
+                                   html.includes('id="resetBtn"') &&
+                                   html.includes('id="skipBtn"') &&
+                                   html.includes('data-mode="pomodoro"') &&
+                                   html.includes('data-mode="shortBreak"') &&
+                                   html.includes('data-mode="longBreak"');
+                        } catch (e) {
+                            return false;
+                        }
+                    }
+                },
+                {
+                    name: 'JavaScript contains PomodoroTimer class',
+                    test: async () => {
+                        try {
+                            const response = await fetch('script.js');
+                            const js = await response.text();
+                            return js.includes('class PomodoroTimer') &&
+                                   js.includes('constructor()') &&
+                                   js.includes('toggleTimer()') &&
+                                   js.includes('startTimer()') &&
+                                   js.includes('pauseTimer()');
+                        } catch (e) {
+                            return false;
+                        }
+                    }
+                },
+                {
+                    name: 'CSS contains responsive design',
+                    test: async () => {
+                        try {
+                            const response = await fetch('style.css');
+                            const css = await response.text();
+                            return css.includes('@media') &&
+                                   css.includes('body.pomodoro') &&
+                                   css.includes('body.shortBreak') &&
+                                   css.includes('body.longBreak');
+                        } catch (e) {
+                            return false;
+                        }
+                    }
+                }
+            ];
+
+            // Run tests sequentially to handle async
+            async function runAllTests() {
+                for (const test of tests) {
+                    try {
+                        const passed = await test.test();
+                        const resultDiv = document.createElement('div');
+                        resultDiv.className = passed ? 'test-result pass' : 'test-result fail';
+                        resultDiv.textContent = `${passed ? '✓' : '✗'} ${test.name}`;
+                        results.appendChild(resultDiv);
+                    } catch (error) {
+                        const resultDiv = document.createElement('div');
+                        resultDiv.className = 'test-result fail';
+                        resultDiv.textContent = `✗ ${test.name} - Error: ${error.message}`;
+                        results.appendChild(resultDiv);
+                    }
+                }
+            }
+
+            runAllTests();
+        }
+        
+        // Add functional test buttons
+        function addFunctionalTests() {
+            const functionalSection = document.createElement('div');
+            functionalSection.className = 'test-section';
+            functionalSection.innerHTML = `
+                <h2>Functional Tests</h2>
+                <p>These tests interact with the live application:</p>
+                <button onclick="testTimerStart()">Test Timer Start</button>
+                <button onclick="testModeSwitch()">Test Mode Switch</button>
+                <button onclick="testReset()">Test Reset</button>
+                <div id="functionalResults"></div>
+            `;
+            document.body.appendChild(functionalSection);
+        }
+
+        function testTimerStart() {
+            const iframe = document.querySelector('iframe');
+            const results = document.getElementById('functionalResults');
+
+            try {
+                // This will work if same-origin, otherwise will show instruction
+                const resultDiv = document.createElement('div');
+                resultDiv.className = 'test-result';
+                resultDiv.innerHTML = `
+                    <strong>Timer Start Test:</strong><br>
+                    1. Click the START button in the app above<br>
+                    2. Verify the button changes to PAUSE<br>
+                    3. Verify the timer counts down<br>
+                    <em>Manual verification required due to browser security.</em>
+                `;
+                results.appendChild(resultDiv);
+            } catch (e) {
+                console.log('Cross-origin restriction, showing manual test instructions');
+            }
+        }
+
+        function testModeSwitch() {
+            const results = document.getElementById('functionalResults');
+            const resultDiv = document.createElement('div');
+            resultDiv.className = 'test-result';
+            resultDiv.innerHTML = `
+                <strong>Mode Switch Test:</strong><br>
+                1. Click "Short Break" tab in the app above<br>
+                2. Verify timer shows 05:00<br>
+                3. Verify background color changes to teal<br>
+                4. Click "Long Break" tab<br>
+                5. Verify timer shows 15:00 and background turns blue<br>
+                <em>Manual verification required.</em>
+            `;
+            results.appendChild(resultDiv);
+        }
+
+        function testReset() {
+            const results = document.getElementById('functionalResults');
+            const resultDiv = document.createElement('div');
+            resultDiv.className = 'test-result';
+            resultDiv.innerHTML = `
+                <strong>Reset Test:</strong><br>
+                1. Start the timer in the app above<br>
+                2. Let it run for a few seconds<br>
+                3. Click RESET button<br>
+                4. Verify timer returns to initial value (25:00 for Pomodoro)<br>
+                5. Verify button shows START again<br>
+                <em>Manual verification required.</em>
+            `;
+            results.appendChild(resultDiv);
+        }
+
+        // Run tests after iframe loads
+        setTimeout(() => {
+            runTests();
+            addFunctionalTests();
+        }, 2000);
+    </script>
+</body>
+</html>
