@@ -1,0 +1,356 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(135deg, #000428, #004e92);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.game-container {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    border-radius: 15px;
+    border: 2px solid #00ff00;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
+    letter-spacing: 5px;
+}
+
+.game-mode {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.game-mode label {
+    font-size: 1.1rem;
+    color: #ccc;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.game-mode label:hover {
+    color: #00ff00;
+    border-color: #00ff00;
+    background: rgba(0, 255, 0, 0.05);
+}
+
+.game-mode input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #00ff00;
+    cursor: pointer;
+}
+
+.game-mode input[type="radio"]:checked + span,
+.game-mode label:has(input[type="radio"]:checked) {
+    color: #00ff00;
+    border-color: #00ff00;
+    background: rgba(0, 255, 0, 0.1);
+}
+
+.difficulty-selector {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.difficulty-selector h3 {
+    font-size: 1.3rem;
+    color: #00ff00;
+    margin-bottom: 10px;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+.difficulty-options {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.difficulty-options label {
+    font-size: 1rem;
+    color: #ccc;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.difficulty-options label:hover {
+    color: #00ff00;
+    border-color: #00ff00;
+    background: rgba(0, 255, 0, 0.05);
+}
+
+.difficulty-options input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #00ff00;
+    cursor: pointer;
+}
+
+.difficulty-options input[type="radio"]:checked + span,
+.difficulty-options label:has(input[type="radio"]:checked) {
+    color: #00ff00;
+    border-color: #00ff00;
+    background: rgba(0, 255, 0, 0.1);
+    font-weight: bold;
+}
+
+.ball-speed-selector {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.ball-speed-selector h3 {
+    font-size: 1.3rem;
+    color: #00ff00;
+    margin-bottom: 10px;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+.speed-options {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.speed-options label {
+    font-size: 0.95rem;
+    color: #ccc;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.speed-options label:hover {
+    color: #00ff00;
+    border-color: #00ff00;
+    background: rgba(0, 255, 0, 0.05);
+}
+
+.speed-options input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #00ff00;
+    cursor: pointer;
+}
+
+.speed-options input[type="radio"]:checked + span,
+.speed-options label:has(input[type="radio"]:checked) {
+    color: #00ff00;
+    border-color: #00ff00;
+    background: rgba(0, 255, 0, 0.1);
+    font-weight: bold;
+}
+
+.score {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.player-score, .computer-score {
+    padding: 10px 20px;
+    background: rgba(0, 255, 0, 0.1);
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+}
+
+#gameCanvas {
+    border: 3px solid #00ff00;
+    background: #000;
+    display: block;
+    margin: 0 auto 20px;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+    max-width: 100%;
+    height: auto;
+}
+
+.controls {
+    margin-top: 20px;
+}
+
+.controls p {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    color: #ccc;
+}
+
+button {
+    background: linear-gradient(45deg, #00ff00, #008800);
+    color: #000;
+    border: none;
+    padding: 12px 25px;
+    margin: 0 10px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 255, 0, 0.4);
+    background: linear-gradient(45deg, #44ff44, #00aa00);
+}
+
+button:disabled {
+    background: #666;
+    color: #999;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.all-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.all-buttons button {
+    height: 44px; /* Consistent height for all buttons */
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#soundToggle {
+    background: linear-gradient(45deg, #00aa00, #006600);
+}
+
+#soundToggle.sound-disabled {
+    background: linear-gradient(45deg, #666, #444);
+    color: #ccc;
+}
+
+#soundToggle.sound-disabled:hover {
+    background: linear-gradient(45deg, #777, #555);
+    transform: translateY(-1px);
+}
+
+
+@media (max-width: 900px) {
+    .game-container {
+        padding: 15px;
+    }
+    
+    #gameCanvas {
+        width: 100%;
+        height: auto;
+        max-width: 800px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .game-mode {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    .game-mode label {
+        font-size: 1rem;
+    }
+    
+    .difficulty-options {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+    
+    .difficulty-options label {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+    
+    .speed-options {
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+    }
+    
+    .speed-options label {
+        font-size: 0.85rem;
+        padding: 5px 10px;
+    }
+    
+    .score {
+        font-size: 1.2rem;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .all-buttons {
+        gap: 10px;
+        flex-direction: column;
+    }
+    
+    .all-buttons button {
+        width: 200px;
+        height: 44px;
+        margin: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-container {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+    }
+    
+    .score {
+        font-size: 1rem;
+    }
+}

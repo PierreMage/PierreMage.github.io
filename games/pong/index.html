@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pong Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>PONG</h1>
+        <div class="game-mode">
+            <label>
+                <input type="radio" name="gameMode" value="single" checked>
+                Single Player (vs AI)
+            </label>
+            <label>
+                <input type="radio" name="gameMode" value="two">
+                Two Player
+            </label>
+        </div>
+        
+        <div class="difficulty-selector">
+            <h3>Difficulty</h3>
+            <div class="difficulty-options">
+                <label>
+                    <input type="radio" name="difficulty" value="easy">
+                    Easy
+                </label>
+                <label>
+                    <input type="radio" name="difficulty" value="medium" checked>
+                    Medium
+                </label>
+                <label>
+                    <input type="radio" name="difficulty" value="hard">
+                    Hard
+                </label>
+            </div>
+        </div>
+        
+        <div class="ball-speed-selector">
+            <h3>Ball Speed</h3>
+            <div class="speed-options">
+                <label>
+                    <input type="radio" name="ballSpeed" value="normal" checked>
+                    Normal
+                </label>
+                <label>
+                    <input type="radio" name="ballSpeed" value="fast">
+                    Fast
+                </label>
+                <label>
+                    <input type="radio" name="ballSpeed" value="faster">
+                    Faster
+                </label>
+                <label>
+                    <input type="radio" name="ballSpeed" value="extreme">
+                    Extreme
+                </label>
+            </div>
+        </div>
+        <div class="score">
+            <div class="player-score">
+                <span id="player1Label">Player 1: </span>
+                <span id="playerScore">0</span>
+            </div>
+            <div class="computer-score">
+                <span id="player2Label">Computer: </span>
+                <span id="computerScore">0</span>
+            </div>
+        </div>
+        <canvas id="gameCanvas" width="800" height="400"></canvas>
+        
+        <div class="controls">
+            <p id="controlsText">Controls: Use W/S keys or Arrow Up/Down to move your paddle</p>
+            <div class="all-buttons">
+                <button id="playPauseButton">Start Game</button>
+                <button id="resetButton">Reset</button>
+                <button id="soundToggle" class="sound-enabled">Sound On</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
