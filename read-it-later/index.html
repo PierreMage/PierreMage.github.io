@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read It Later - Your Personal Article Saver</title>
+    <meta name="description" content="Save articles and URLs for later reading. A simple, clean interface to manage your reading list.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main application container -->
+    <div class="app-container">
+        <!-- Header section -->
+        <header class="header">
+            <h1 class="app-title">Read It Later</h1>
+            <p class="app-subtitle">Save articles for later reading</p>
+        </header>
+
+        <!-- Main content area -->
+        <main class="main-content">
+            <!-- Add article form -->
+            <section class="add-article-section">
+                <h2 class="section-title">Add New Article</h2>
+                <form class="add-article-form" id="addArticleForm">
+                    <div class="form-group">
+                        <label for="articleUrl" class="form-label">Article URL</label>
+                        <input 
+                            type="url" 
+                            id="articleUrl" 
+                            name="articleUrl" 
+                            class="form-input" 
+                            placeholder="https://example.com/article"
+                            required
+                            aria-describedby="urlHelp"
+                        >
+                        <small id="urlHelp" class="form-help">Enter the URL of the article you want to save</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="articleTitle" class="form-label">Title (Optional)</label>
+                        <input
+                            type="text"
+                            id="articleTitle"
+                            name="articleTitle"
+                            class="form-input"
+                            placeholder="Article title"
+                            aria-describedby="titleHelp"
+                        >
+                        <small id="titleHelp" class="form-help">Leave blank to auto-fetch from the URL</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="articleTags" class="form-label">Tags (Optional)</label>
+                        <input
+                            type="text"
+                            id="articleTags"
+                            name="articleTags"
+                            class="form-input"
+                            placeholder="javascript, tutorial, web development"
+                            aria-describedby="tagsHelp"
+                        >
+                        <small id="tagsHelp" class="form-help">Separate multiple tags with commas</small>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Save Article</button>
+                </form>
+            </section>
+
+            <!-- Search and filter section -->
+            <section class="search-section">
+                <h2 class="section-title">Your Articles</h2>
+                <!-- Search bar above tabs -->
+                <div class="search-group">
+                    <label for="searchInput" class="sr-only">Search articles</label>
+                    <input
+                        type="search"
+                        id="searchInput"
+                        class="search-input"
+                        placeholder="Search articles by title, URL, or tags..."
+                        aria-label="Search articles"
+                    >
+                    <small class="form-help">Search by title, URL, or tags</small>
+                </div>
+
+                <!-- Tab-style filter interface -->
+                <div class="filter-tabs" role="tablist" aria-label="Filter articles">
+                    <button
+                        id="filterAll"
+                        class="filter-tab active"
+                        data-filter="all"
+                        role="tab"
+                        aria-selected="true"
+                        aria-controls="articlesContainer"
+                    >
+                        All Articles
+                    </button>
+                    <button
+                        id="filterUnread"
+                        class="filter-tab"
+                        data-filter="unread"
+                        role="tab"
+                        aria-selected="false"
+                        aria-controls="articlesContainer"
+                    >
+                        Unread
+                    </button>
+                    <button
+                        id="filterArchived"
+                        class="filter-tab"
+                        data-filter="read"
+                        role="tab"
+                        aria-selected="false"
+                        aria-controls="articlesContainer"
+                    >
+                        Archived
+                    </button>
+                </div>
+
+                <!-- Import/Export controls -->
+                <div class="import-export-controls">
+                    <div class="import-group">
+                        <label for="csvFileInput" class="btn btn-secondary btn-small">
+                            Import CSV
+                            <input
+                                type="file"
+                                id="csvFileInput"
+                                accept=".csv"
+                                style="display: none;"
+                                aria-describedby="importHelp"
+                            >
+                        </label>
+                        <small id="importHelp" class="form-help">Import articles from Pocket CSV export</small>
+                    </div>
+                    <div class="export-group">
+                        <button id="exportButton" class="btn btn-secondary btn-small">
+                            Export CSV
+                        </button>
+                        <small class="form-help">Export articles in Pocket CSV format</small>
+                    </div>
+                    <div class="delete-all-group">
+                        <button id="deleteAllButton" class="btn btn-danger btn-small" style="display: none;">
+                            Delete All
+                        </button>
+                        <small class="form-help">Remove all saved articles</small>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Articles list -->
+            <section class="articles-section">
+                <div class="articles-container" id="articlesContainer">
+                    <!-- Articles will be dynamically inserted here -->
+                    <div class="empty-state" id="emptyState">
+                        <h3>No articles saved yet</h3>
+                        <p>Start by adding your first article above!</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Read It Later. Built with vanilla HTML, CSS, and JavaScript.</p>
+        </footer>
+    </div>
+
+    <!-- Error/Success message container -->
+    <div class="message-container" id="messageContainer" aria-live="polite"></div>
+
+    <!-- Delete All Confirmation Modal -->
+    <div id="deleteAllModal" class="modal" style="display: none;" role="dialog" aria-labelledby="deleteAllTitle" aria-describedby="deleteAllMessage">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="deleteAllTitle">Confirm Delete All</h3>
+                <button class="modal-close" aria-label="Close dialog">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="deleteAllMessage">Are you sure you want to delete all articles? This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button id="confirmDeleteAll" class="btn btn-danger">Delete All</button>
+                <button id="cancelDeleteAll" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Article Modal -->
+    <div id="editArticleModal" class="modal" style="display: none;" role="dialog" aria-labelledby="editArticleTitle" aria-describedby="editArticleForm">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="editArticleTitle">Edit Article</h3>
+                <button class="modal-close" aria-label="Close dialog">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="editArticleForm" class="edit-article-form">
+                    <div class="form-group">
+                        <label for="editArticleTitleInput" class="form-label">Title</label>
+                        <input
+                            type="text"
+                            id="editArticleTitleInput"
+                            name="editArticleTitle"
+                            class="form-input"
+                            placeholder="Article title"
+                            required
+                            aria-describedby="editTitleHelp"
+                        >
+                        <small id="editTitleHelp" class="form-help">Enter the article title</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editArticleTagsInput" class="form-label">Tags</label>
+                        <input
+                            type="text"
+                            id="editArticleTagsInput"
+                            name="editArticleTags"
+                            class="form-input"
+                            placeholder="javascript, tutorial, web development"
+                            aria-describedby="editTagsHelp"
+                        >
+                        <small id="editTagsHelp" class="form-help">Separate multiple tags with commas</small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="saveEditedArticle" class="btn btn-primary">Save Changes</button>
+                <button id="cancelEditArticle" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
