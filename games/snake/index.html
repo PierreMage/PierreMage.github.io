@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <h1>SNAKE</h1>
+            <div class="scores">
+                <div class="score">Score: <span id="current-score">0</span></div>
+                <div class="high-score">High Score: <span id="high-score">0</span></div>
+            </div>
+            <div class="audio-controls">
+                <button id="sound-toggle" class="audio-btn" title="Toggle Sound Effects">
+                    <span class="audio-icon">♫</span> SFX: <span id="sound-status">ON</span>
+                </button>
+                <button id="reset-highscore" class="audio-btn" title="Reset High Score">
+                    <span class="audio-icon">↻</span> Reset High Score
+                </button>
+            </div>
+        </div>
+        
+        <div class="game-board-container">
+            <canvas id="gameBoard" width="450" height="450"></canvas>
+            <div class="game-over" id="gameOver">
+                <h2>GAME OVER</h2>
+                <p>Final Score: <span id="final-score">0</span></p>
+                <button id="restart-btn">Play Again</button>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <div class="instructions">
+                <p class="desktop-controls">Desktop: Use arrow keys • Press SPACE to start/pause</p>
+                <p class="mobile-controls">Mobile: Swipe to control snake • Tap to start/pause</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
