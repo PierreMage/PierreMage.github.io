@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pierre's Game Collection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .title {
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 10px rgba(255,255,255,0.3); }
+            to { text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.6); }
+        }
+
+        .subtitle {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .game-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .game-card:hover::before {
+            left: 100%;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .game-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .game-title {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .game-description {
+            color: rgba(255,255,255,0.8);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .play-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .play-button:hover {
+            background: linear-gradient(45deg, #ff5252, #ff7979);
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(255,107,107,0.3);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .game-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">🎮 Game Collection</h1>
+            <p class="subtitle">Choose your adventure!</p>
+        </div>
+
+        <div class="games-grid">
+            <div class="game-card">
+                <div class="game-icon">💣</div>
+                <h2 class="game-title">Bomberman</h2>
+                <p class="game-description">Classic arcade action! Plant bombs and defeat your enemies in this explosive adventure.</p>
+                <a href="bomberman/" class="play-button">Play Now</a>
+            </div>
+
+            <div class="game-card">
+                <div class="game-icon">🏓</div>
+                <h2 class="game-title">Pong</h2>
+                <p class="game-description">The original arcade classic! Control your paddle and try to outscore your opponent.</p>
+                <a href="pong/" class="play-button">Play Now</a>
+            </div>
+
+            <div class="game-card">
+                <div class="game-icon">🐍</div>
+                <h2 class="game-title">Snake</h2>
+                <p class="game-description">Guide the snake to eat food and grow longer, but don't hit the walls or yourself!</p>
+                <a href="snake/" class="play-button">Play Now</a>
+            </div>
+
+            <div class="game-card">
+                <div class="game-icon">👾</div>
+                <h2 class="game-title">Space Invaders</h2>
+                <p class="game-description">Defend Earth from alien invasion! Shoot down waves of space invaders in this retro shooter.</p>
+                <a href="space-invaders/" class="play-button">Play Now</a>
+            </div>
+
+            <div class="game-card">
+                <div class="game-icon">🟦</div>
+                <h2 class="game-title">Tetris</h2>
+                <p class="game-description">The ultimate puzzle game! Arrange falling blocks to create complete lines and clear the board.</p>
+                <a href="tetris/" class="play-button">Play Now</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Built with ❤️ by Pierre | Have fun gaming!</p>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const gameCards = document.querySelectorAll('.game-card');
+            
+            // Add click effect
+            gameCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.transform = 'translateY(-5px) scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+
+            // Add random floating animation to game icons
+            const gameIcons = document.querySelectorAll('.game-icon');
+            gameIcons.forEach((icon, index) => {
+                icon.style.animation = `float 3s ease-in-out infinite ${index * 0.5}s`;
+            });
+
+
+            // Add particle effect on hover (optional enhancement)
+            gameCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    createParticles(this);
+                });
+            });
+
+            function createParticles(element) {
+                const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57'];
+                
+                for (let i = 0; i < 6; i++) {
+                    const particle = document.createElement('div');
+                    particle.style.cssText = `
+                        position: absolute;
+                        width: 4px;
+                        height: 4px;
+                        background: ${colors[Math.floor(Math.random() * colors.length)]};
+                        border-radius: 50%;
+                        pointer-events: none;
+                        z-index: 1000;
+                    `;
+                    
+                    const rect = element.getBoundingClientRect();
+                    particle.style.left = (rect.left + Math.random() * rect.width) + 'px';
+                    particle.style.top = (rect.top + Math.random() * rect.height) + 'px';
+                    
+                    document.body.appendChild(particle);
+                    
+                    // Animate particle
+                    particle.animate([
+                        { transform: 'translateY(0px)', opacity: 1 },
+                        { transform: 'translateY(-50px)', opacity: 0 }
+                    ], {
+                        duration: 1000,
+                        easing: 'ease-out'
+                    }).onfinish = () => particle.remove();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
