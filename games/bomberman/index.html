@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bomberman Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="gameContainer">
+        <div id="gameHeader">
+            <h1>Bomberman</h1>
+            <div id="gameInfo">
+                <div id="score">Score: <span id="scoreValue">0</span></div>
+                <div id="level">Level: <span id="levelValue">1</span></div>
+                <div id="lives">❤️ <span id="livesValue">3</span></div>
+                <div id="bombs">💣 <span id="bombsValue">1</span></div>
+                <div id="power">🔥 <span id="powerValue">1</span></div>
+                <div id="speed">⚡ <span id="speedValue">1</span></div>
+            </div>
+        </div>
+
+        <div id="gameArea">
+            <canvas id="gameCanvas" width="800" height="600"></canvas>
+            
+            <!-- Game State Overlays -->
+            <div id="startScreen" class="overlay">
+                <h2>Bomberman</h2>
+                <p>Use arrow keys to move, SPACE to place bombs</p>
+                <p>On mobile: Use touch controls below</p>
+                <button id="startButton">Start Game</button>
+            </div>
+
+            <div id="gameOverScreen" class="overlay hidden">
+                <h2>Game Over</h2>
+                <p>Final Score: <span id="finalScore">0</span></p>
+                <button id="restartButton">Play Again</button>
+            </div>
+
+            <div id="pauseScreen" class="overlay hidden">
+                <h2>Paused</h2>
+                <button id="resumeButton">Resume</button>
+                <button id="mainMenuButton">Main Menu</button>
+            </div>
+        </div>
+
+        <!-- Mobile Touch Controls -->
+        <div id="mobileControls" class="mobile-only">
+            <div id="dpad">
+                <button class="control-btn" id="upBtn">↑</button>
+                <div class="dpad-middle">
+                    <button class="control-btn" id="leftBtn">←</button>
+                    <button class="control-btn" id="rightBtn">→</button>
+                </div>
+                <button class="control-btn" id="downBtn">↓</button>
+            </div>
+            <div id="actionControls">
+                <button class="action-btn" id="bombBtn">💣</button>
+                <button class="action-btn" id="pauseBtn">⏸</button>
+                <button class="action-btn" id="muteBtn">🔊</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="sounds.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
