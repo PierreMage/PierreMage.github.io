@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Bird</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <canvas id="gameCanvas" width="400" height="600"></canvas>
+        
+        <div class="ui-overlay">
+            <div id="startScreen" class="screen">
+                <h1 class="title">🐦 Flappy Bird</h1>
+                <p class="instruction">
+                    <span class="desktop-instruction">Press SPACE to fly</span>
+                    <span class="mobile-instruction">Tap to fly</span>
+                </p>
+                <div class="difficulty-selection">
+                    <h3 class="difficulty-title">Select Difficulty</h3>
+                    <div class="difficulty-buttons">
+                        <button id="easyBtn" class="difficulty-btn easy-btn" data-difficulty="easy">
+                            <span class="difficulty-emoji">🟢</span>
+                            <span class="difficulty-name">Easy</span>
+                        </button>
+                        <button id="normalBtn" class="difficulty-btn normal-btn selected" data-difficulty="normal">
+                            <span class="difficulty-emoji">🟡</span>
+                            <span class="difficulty-name">Normal</span>
+                        </button>
+                        <button id="hardBtn" class="difficulty-btn hard-btn" data-difficulty="hard">
+                            <span class="difficulty-emoji">🔴</span>
+                            <span class="difficulty-name">Hard</span>
+                        </button>
+                    </div>
+                </div>
+                <button id="startBtn" class="btn">Start Game</button>
+            </div>
+            
+            <div id="gameOverScreen" class="screen hidden">
+                <h2 class="game-over-title">Game Over!</h2>
+                <div class="score-display">
+                    <div class="score-item">
+                        <span class="score-label">Score:</span>
+                        <span id="finalScore" class="score-value">0</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">Best:</span>
+                        <span id="bestScore" class="score-value">0</span>
+                    </div>
+                </div>
+                <button id="restartBtn" class="btn">Play Again</button>
+            </div>
+            
+            <div id="gameUI" class="game-ui hidden">
+                <div id="currentScore" class="current-score">0</div>
+            </div>
+        </div>
+        
+        <div class="controls-info">
+            <div class="control-hint desktop-control">Press SPACE to flap</div>
+            <div class="control-hint mobile-control">Tap anywhere to flap</div>
+        </div>
+    </div>
+    
+    <div class="back-button">
+        <a href="../" class="back-link">← Back to Games</a>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
