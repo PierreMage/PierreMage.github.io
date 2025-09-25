@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interval Alarm</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="alarm-card">
+            <div class="control-section">
+                <div class="input-group">
+                    <label for="minutes">Alarm Interval (minutes):</label>
+                    <input type="number" id="minutes" min="5" max="60" value="15" step="5">
+                </div>
+                
+                <div class="button-group">
+                    <button id="startBtn" class="btn btn-start">Start Alarm</button>
+                    <button id="stopBtn" class="btn btn-stop" disabled>Stop Alarm</button>
+                </div>
+            </div>
+            
+            <div class="status-section">
+                <div class="current-time">
+                    <h3>Current Time</h3>
+                    <div id="currentTime" class="time-display">--:--:--</div>
+                </div>
+                
+                <div class="next-alarm">
+                    <h3>Next Alarm</h3>
+                    <div id="nextAlarm" class="time-display">--:--:--</div>
+                </div>
+                
+                <div class="status-indicator">
+                    <div id="statusLight" class="status-light"></div>
+                    <span id="statusText">Alarm Off</span>
+                </div>
+            </div>
+            
+            <div class="alarm-log">
+                <div class="history-header">
+                    <h3>Alarm History</h3>
+                    <button id="clearHistoryBtn" class="btn btn-clear">Clear History</button>
+                </div>
+                <div id="alarmHistory" class="history-list">
+                    <p class="no-history">No alarms yet</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
