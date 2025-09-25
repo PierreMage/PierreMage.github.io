@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medication Timing Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💊 Medication Timing Calculator</h1>
+            <p class="subtitle">Find the optimal schedule for your medication doses</p>
+        </header>
+
+        <main>
+            <div class="calculator-card">
+                <form id="medication-form" class="form-section">
+                    <div class="input-group">
+                        <label for="dosing-interval">
+                            <span class="label-text">Dosing Interval</span>
+                            <span class="label-description">How often should you take your medication?</span>
+                        </label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="number" 
+                                id="dosing-interval" 
+                                name="dosing-interval" 
+                                min="0.5"
+                                max="24" 
+                                step="0.5" 
+                                placeholder="8"
+                                required
+                            >
+                            <span class="input-suffix">hours</span>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="start-time">
+                            <span class="label-text">First Dose Time</span>
+                            <span class="label-description">When would you like to take your first dose?</span>
+                        </label>
+                        <input 
+                            type="time" 
+                            id="start-time" 
+                            name="start-time" 
+                            value="08:00"
+                            required
+                        >
+                    </div>
+                </form>
+
+                <div id="results-section" class="results-section hidden">
+                    <h2>Your Medication Schedule</h2>
+                    <div class="schedule-info">
+                        <div class="info-item">
+                            <span class="info-label">Dosing Interval:</span>
+                            <span id="interval-display" class="info-value"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Doses per Day:</span>
+                            <span id="doses-count" class="info-value"></span>
+                        </div>
+                    </div>
+                    <div id="schedule-list" class="schedule-list"></div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3>💡 Tips for Medication Timing</h3>
+                <ul class="tips-list">
+                    <li><strong>Consistency is key:</strong> Try to take your medication at the same times each day</li>
+                    <li><strong>Set reminders:</strong> Use phone alarms or medication reminder apps</li>
+                    <li><strong>Consider your routine:</strong> Align doses with meals or daily activities when possible</li>
+                    <li><strong>Consult your doctor:</strong> Always follow your healthcare provider's specific instructions</li>
+                </ul>
+            </div>
+        </main>
+
+        <footer>
+            <div class="disclaimer">
+                <p><strong>⚠️ Medical Disclaimer:</strong> This tool is for informational purposes only and does not provide medical advice, diagnosis, or treatment. Always consult your healthcare provider for medication guidance and follow their specific instructions. The creators assume no liability for any consequences from its use.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

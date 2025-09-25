@@ -1,0 +1,344 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #e2e8f0;
+    background: linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #4a5568 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #f7fafc;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-weight: 300;
+    color: #cbd5e0;
+}
+
+/* Cards */
+.calculator-card,
+.info-card {
+    background: #2d3748;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    margin-bottom: 2rem;
+    overflow: hidden;
+    border: 1px solid #4a5568;
+}
+
+.calculator-card {
+    padding: 2rem;
+}
+
+.info-card {
+    padding: 1.5rem;
+}
+
+/* Form styles */
+.form-section {
+    margin-bottom: 1rem;
+}
+
+.input-group {
+    margin-bottom: 1rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.label-text {
+    font-weight: 500;
+    font-size: 1rem;
+    color: #f7fafc;
+    display: block;
+}
+
+.label-description {
+    font-size: 0.8rem;
+    color: #a0aec0;
+    font-weight: 300;
+    display: block;
+    margin-top: 0.125rem;
+    margin-bottom: 0.5rem;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+input[type="number"],
+input[type="time"] {
+    width: 100%;
+    padding: 0.625rem 1rem;
+    border: 2px solid #4a5568;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    background: #1a202c;
+    color: #e2e8f0;
+}
+
+/* Fix Firefox number input spinner overlap with suffix */
+input[type="number"] {
+    padding-right: 5rem; /* Extra space for spinner buttons and suffix */
+    -moz-appearance: textfield; /* Remove Firefox default spinner styling */
+}
+
+/* Hide Firefox spinner buttons completely */
+input[type="number"]::-moz-number-spin-box,
+input[type="number"]::-moz-number-spin-up,
+input[type="number"]::-moz-number-spin-down {
+    -moz-appearance: none;
+    display: none;
+}
+
+/* Hide WebKit spinner buttons for consistency */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"]:focus,
+input[type="time"]:focus {
+    outline: none;
+    border-color: #667eea;
+    background: #2d3748;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+/* Add subtle animation for real-time updates */
+.schedule-list {
+    transition: all 0.3s ease;
+}
+
+.dose-item {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.input-suffix {
+    position: absolute;
+    right: 1rem;
+    color: #a0aec0;
+    font-weight: 500;
+    pointer-events: none;
+    z-index: 1;
+    user-select: none;
+}
+
+/* Results section */
+.results-section {
+    border-top: 1px solid #4a5568;
+    padding-top: 1.5rem;
+    margin-top: 1rem;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.results-section.hidden {
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+}
+
+.results-section h2 {
+    color: #f7fafc;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.schedule-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #1a202c;
+    border-radius: 8px;
+    border: 1px solid #4a5568;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-label {
+    font-size: 0.875rem;
+    color: #a0aec0;
+    font-weight: 400;
+}
+
+.info-value {
+    font-size: 1.125rem;
+    color: #f7fafc;
+    font-weight: 600;
+}
+
+.schedule-list {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.dose-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background: #1a202c;
+    color: #f7fafc;
+    border-radius: 8px;
+    font-weight: 500;
+    border: 2px solid #4a5568;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+}
+
+.dose-item:hover {
+    border-color: #667eea;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transform: translateY(-1px);
+}
+
+.dose-number {
+    background: #667eea;
+    color: #ffffff;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.dose-time {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #f7fafc;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.day-indicator {
+    font-size: 0.75rem;
+    color: #cbd5e0;
+    font-weight: 500;
+    margin-left: 0.5rem;
+    background: rgba(203, 213, 224, 0.15);
+    padding: 0.125rem 0.375rem;
+    border-radius: 12px;
+}
+
+/* Info card */
+.info-card h3 {
+    color: #f7fafc;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.tips-list {
+    list-style: none;
+    padding: 0;
+}
+
+.tips-list li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #4a5568;
+    color: #cbd5e0;
+}
+
+.tips-list li:last-child {
+    border-bottom: none;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    color: #cbd5e0;
+    opacity: 0.9;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.disclaimer {
+    background: rgba(45, 55, 72, 0.6);
+    padding: 1rem;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    border: 1px solid #4a5568;
+    text-align: center;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.disclaimer strong {
+    color: #fbb6ce;
+}
+
+/* Utility classes */
+.hidden {
+    display: none;
+}
+
+/* Override hidden for results section to use opacity transition */
+.results-section.hidden {
+    display: block;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .calculator-card,
+    .info-card {
+        padding: 1.5rem;
+    }
+    
+    .schedule-info {
+        grid-template-columns: 1fr;
+    }
+}

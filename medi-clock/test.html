@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medication Calculator Tests</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            padding: 20px;
+            background: #1a202c;
+            color: #e2e8f0;
+        }
+        .test-section {
+            background: #2d3748;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            border: 1px solid #4a5568;
+        }
+        .test-result {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+        }
+        .pass {
+            background: #2d3748;
+            color: #68d391;
+            border: 1px solid #38a169;
+        }
+        .fail {
+            background: #2d3748;
+            color: #fc8181;
+            border: 1px solid #e53e3e;
+        }
+        .info {
+            background: #2d3748;
+            color: #90cdf4;
+            border: 1px solid #4299e1;
+        }
+        h1 {
+            color: #f7fafc;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Medication Calculator Test Suite</h1>
+    <div id="test-results"></div>
+
+    <script>
+        // Simplified version of the calculator for testing
+        class TestCalculator {
+            parseTime(timeString) {
+                const [hours, minutes] = timeString.split(':').map(Number);
+                const date = new Date();
+                date.setHours(hours, minutes, 0, 0);
+                return date;
+            }
+
+            calculateSchedule(intervalHours, startTime) {
+                const schedule = [];
+                const startDateTime = this.parseTime(startTime);
+                const intervalMinutes = intervalHours * 60;
+                const minutesIn24Hours = 24 * 60;
+                const maxDoses = Math.floor(minutesIn24Hours / intervalMinutes);
+
+                for (let i = 0; i < maxDoses; i++) {
+                    const doseTime = new Date(startDateTime);
+                    doseTime.setMinutes(doseTime.getMinutes() + (i * intervalMinutes));
+                    
+                    schedule.push({
+                        doseNumber: i + 1,
+                        time: doseTime,
+                        formattedTime: doseTime.toLocaleTimeString('en-US', {
+                            hour12: true,
+                            hour: 'numeric',
+                            minute: '2-digit'
+                        })
+                    });
+                }
+
+                return {
+                    doses: schedule,
+                    dosesPerDay: maxDoses,
+                    intervalHours: intervalHours
+                };
+            }
+        }
+
+        // Test cases
+        const testCases = [
+            {
+                name: "Every 8 hours starting at 8:00 AM",
+                interval: 8,
+                startTime: "08:00",
+                expectedDoses: 3,
+                expectedTimes: ["8:00 AM", "4:00 PM", "12:00 AM"]
+            },
+            {
+                name: "Every 6 hours starting at 9:00 AM",
+                interval: 6,
+                startTime: "09:00",
+                expectedDoses: 4,
+                expectedTimes: ["9:00 AM", "3:00 PM", "9:00 PM", "3:00 AM"]
+            },
+            {
+                name: "Every 12 hours starting at 7:00 AM",
+                interval: 12,
+                startTime: "07:00",
+                expectedDoses: 2,
+                expectedTimes: ["7:00 AM", "7:00 PM"]
+            },
+            {
+                name: "Every 4 hours starting at 6:00 AM",
+                interval: 4,
+                startTime: "06:00",
+                expectedDoses: 6,
+                expectedTimes: ["6:00 AM", "10:00 AM", "2:00 PM", "6:00 PM", "10:00 PM", "2:00 AM"]
+            },
+            {
+                name: "Once daily at 10:00 AM",
+                interval: 24,
+                startTime: "10:00",
+                expectedDoses: 1,
+                expectedTimes: ["10:00 AM"]
+            }
+        ];
+
+        // Run tests
+        function runTests() {
+            const calculator = new TestCalculator();
+            const resultsDiv = document.getElementById('test-results');
+            let passedTests = 0;
+            let totalTests = 0;
+
+            testCases.forEach(testCase => {
+                const section = document.createElement('div');
+                section.className = 'test-section';
+                section.innerHTML = `<h3>${testCase.name}</h3>`;
+
+                const result = calculator.calculateSchedule(testCase.interval, testCase.startTime);
+                
+                // Test number of doses
+                totalTests++;
+                const dosesTest = document.createElement('div');
+                dosesTest.className = 'test-result';
+                if (result.dosesPerDay === testCase.expectedDoses) {
+                    dosesTest.className += ' pass';
+                    dosesTest.textContent = `✓ PASS: Expected ${testCase.expectedDoses} doses, got ${result.dosesPerDay}`;
+                    passedTests++;
+                } else {
+                    dosesTest.className += ' fail';
+                    dosesTest.textContent = `✗ FAIL: Expected ${testCase.expectedDoses} doses, got ${result.dosesPerDay}`;
+                }
+                section.appendChild(dosesTest);
+
+                // Test timing accuracy
+                totalTests++;
+                const timesTest = document.createElement('div');
+                timesTest.className = 'test-result';
+                const actualTimes = result.doses.map(dose => dose.formattedTime);
+                const timesMatch = JSON.stringify(actualTimes) === JSON.stringify(testCase.expectedTimes);
+                
+                if (timesMatch) {
+                    timesTest.className += ' pass';
+                    timesTest.textContent = `✓ PASS: Times match expected schedule`;
+                    passedTests++;
+                } else {
+                    timesTest.className += ' fail';
+                    timesTest.textContent = `✗ FAIL: Expected [${testCase.expectedTimes.join(', ')}], got [${actualTimes.join(', ')}]`;
+                }
+                section.appendChild(timesTest);
+
+                // Show actual schedule
+                const scheduleInfo = document.createElement('div');
+                scheduleInfo.className = 'test-result info';
+                scheduleInfo.innerHTML = `
+                    <strong>Calculated Schedule:</strong><br>
+                    ${result.doses.map(dose => `Dose ${dose.doseNumber}: ${dose.formattedTime}`).join('<br>')}
+                `;
+                section.appendChild(scheduleInfo);
+
+                resultsDiv.appendChild(section);
+            });
+
+            // Summary
+            const summary = document.createElement('div');
+            summary.className = 'test-section';
+            summary.innerHTML = `
+                <h2>Test Summary</h2>
+                <div class="test-result ${passedTests === totalTests ? 'pass' : 'fail'}">
+                    ${passedTests}/${totalTests} tests passed (${Math.round(passedTests/totalTests*100)}%)
+                </div>
+            `;
+            resultsDiv.appendChild(summary);
+        }
+
+        // Run tests when page loads
+        document.addEventListener('DOMContentLoaded', runTests);
+    </script>
+</body>
+</html>
