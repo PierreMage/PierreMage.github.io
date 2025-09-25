@@ -8,9 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Pomodoro Timer</h1>
-        </header>
+
 
         <main>
             <!-- Mode Selection Tabs -->
@@ -46,6 +44,27 @@
                     <span class="dot"></span>
                 </div>
             </div>
+
+            <!-- Task Management -->
+            <section class="task-section">
+                <div class="active-task-display" id="activeTaskDisplay">
+                    <span class="active-task-label">No active task</span>
+                </div>
+
+                <div class="task-header">
+                    <h3>Tasks</h3>
+                    <button class="clear-tasks-btn" id="clearTasksBtn">Clear All</button>
+                </div>
+
+                <div class="add-task-container">
+                    <input type="text" id="taskInput" placeholder="What are you working on?" maxlength="100">
+                    <button class="add-task-btn" id="addTaskBtn">+</button>
+                </div>
+
+                <div class="task-list" id="taskList">
+                    <div class="no-tasks">Tasks will appear here</div>
+                </div>
+            </section>
         </main>
     </div>
 
